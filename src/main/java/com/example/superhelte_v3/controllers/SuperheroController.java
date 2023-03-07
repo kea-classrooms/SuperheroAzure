@@ -20,10 +20,11 @@ import java.util.List;
         }
 
 
+        // Tror ikke requestparam er nødvendig her ?
     @GetMapping(path = "/")
     public ResponseEntity<List<Superhero>> getSuperheroList(@RequestParam(required = false) String format){
         List<Superhero> list = superheroServices.getSuperheroRepository();
-        return new ResponseEntity<List<Superhero>>(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     /*
@@ -60,7 +61,7 @@ import java.util.List;
     // Requestparam bruger ?name=nlalal&supeheropower=blblbl
     @GetMapping("/opret")
     public ResponseEntity<Superhero> opretHero(@RequestParam String superheroName, @RequestParam String superheroPower, @RequestParam int creationYear){
-            Superhero s = new Superhero(superheroName, superheroPower, creationYear);
+            Superhero s = new Superhero(superheroName, "realnametest", superheroPower, creationYear, "testby");
             superheroServices.addSuperheroToDatabase(s);
             return new ResponseEntity<>(s, HttpStatus.OK);
     }
@@ -90,5 +91,17 @@ import java.util.List;
             superheroServices.replaceSuperhero(s);
             return new ResponseEntity<>(s, HttpStatus.OK);
     }
+
+
+    // Opgave 1-4 Superhelte v.4
+
+    // opg1 - returner heroName, realName og creationYear
+    @GetMapping(path = "/opgave1")
+    public ResponseEntity<List<Superhero>> opgave1(@RequestParam(required = false) String format){
+        List<Superhero> list = superheroServices.getSuperheroRepository();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+
 
 }
