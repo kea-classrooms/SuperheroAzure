@@ -26,14 +26,38 @@ import java.util.List;
         return new ResponseEntity<List<Superhero>>(list, HttpStatus.OK);
     }
 
-    // bruger bare stinavnet
+    /*
+    Vi skal nu have mulighed for at anvende en request parameter, ‘format’,
+    til ‘/’ endpointet, der angiver at vi ønsker output formateret til html.
+    Brug af requestparameteren kommer til at se sådan ud: http://localhost:8080/superhelte?format=html
+
+    I controller metoden formateres output fra vores service til en html tabel hvis
+    requestparameteren eksisterer og er ‘html’. Ved brug af et StringBuilder objekt
+    opbygges en html streng der indeholder html tags flettet sammen med data.
+
+    Til slut returneres strengen i et ResponseEntity objekt sammen med en statuskode
+     og en HTTPHeader der indeholder strengen “content-type:text/html”
+
+    Da metoden skal være i stand til at returnere både en String (html) og en
+    List<Superhelt> (superhelte objekter), angives metodens returværdi som
+    ResponseEntity<?>
+     */
+
+    // Find superhero med pathvariable (stinavnet)
     @GetMapping(path = "/{name}")
     public ResponseEntity<Superhero> getSuperhero(@PathVariable String name){
         Superhero s = superheroServices.getSuperheroByName(name);
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
-    // Requestparam bruger ?name=nlalal&supeheropoer=blblbl
+    // find superhero med RequestParam (?name=xxx osv)
+    @GetMapping("/name")
+    public ResponseEntity<Superhero> getSuperheroByParam(@RequestParam String name){
+        Superhero s = superheroServices.getSuperheroByName(name);
+        return new ResponseEntity<>(s, HttpStatus.OK);
+    }
+
+    // Requestparam bruger ?name=nlalal&supeheropower=blblbl
     @GetMapping("/opret")
     public ResponseEntity<Superhero> opretHero(@RequestParam String superheroName, @RequestParam String superheroPower, @RequestParam int creationYear){
             Superhero s = new Superhero(superheroName, superheroPower, creationYear);
@@ -58,7 +82,7 @@ import java.util.List;
     @GetMapping("/delete/{name}")
     public ResponseEntity<String> deleteHeroByPath(@PathVariable String name) {
         superheroServices.deleteSuperheroFromDatabase(name);
-        return new ResponseEntity<>(name, HttpStatus.OK);
+        return new ResponseEntity<>(name + "has been deleted", HttpStatus.OK);
     }
 
     @PutMapping("/edit")
