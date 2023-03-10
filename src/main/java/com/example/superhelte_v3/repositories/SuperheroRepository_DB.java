@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SuperheroRepository_DB {
+public class SuperheroRepository_DB implements IRepositories{
     @Value("${spring.datasource.url}")
     private String db_url;
 
@@ -22,6 +22,7 @@ public class SuperheroRepository_DB {
     @Value("${spring.datasource.password}")
     private String pwd;
 
+    @Override
     public ArrayList<Superhero> getSuperheroesFromDB() {
         ArrayList<Superhero> list = new ArrayList<Superhero>();
         try (Connection con = DriverManager.getConnection(db_url, uid, pwd)) {
@@ -41,6 +42,7 @@ public class SuperheroRepository_DB {
         } return list;
     }
 
+    @Override
     public ArrayList<heroPowerCountDTO> getHeroPowerCount() {
         ArrayList<heroPowerCountDTO> list = new ArrayList<heroPowerCountDTO>();
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/superheroes", "root", "nico1919")) {
@@ -60,6 +62,7 @@ public class SuperheroRepository_DB {
         } return list;
     }
 
+    @Override
     public ArrayList<heroPowersDTO> getHeroPowers(String name) {
         ArrayList<heroPowersDTO> list = new ArrayList<heroPowersDTO>();
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/superheroes", "root", "nico1919")) {
@@ -83,6 +86,7 @@ public class SuperheroRepository_DB {
         } return list;
     }
 
+    @Override
     public ArrayList<heroCityDTO> getHeroCity(String name) {
         ArrayList<heroCityDTO> list = new ArrayList<heroCityDTO>();
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/superheroes", "root", "nico1919")) {
