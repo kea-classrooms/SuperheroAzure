@@ -10,9 +10,9 @@ import java.util.List;
 public class SuperheroRepository {
 
     private ArrayList<Superhero> superheroDatabase = new ArrayList<>(List.of(
-            new Superhero("Superhero1", "realname1", "fly", 1990, "Oslo"),
-            new Superhero("Superhero2", "realname2", "fly", 1994, "Kbh"),
-            new Superhero("Superhero3", "realname3", "fly", 1992, "London")
+            new Superhero("Superhero1", "realname1", 1990),
+            new Superhero("Superhero2", "realname2", 1994),
+            new Superhero("Superhero3", "realname3", 1992)
     ));
 
     public void addSuperheroToDatabase(Superhero s) {
