@@ -108,23 +108,6 @@ public class SuperheroRepository_DB implements IRepositories{
     }
 
 
-    /*
-    public void addSuperheroToDatabase(Superhero s) {
-    }
-
-    public void replaceSuperhero(Superhero s){
-    }
-
-    public Superhero getSuperhero(String name){
-    }
-
-    public ArrayList<Superhero> getSuperHeroDatabase() {
-    }
-
-    public void deleteHero(String name) {
-    }
-     */
-
 
 
 }

@@ -28,7 +28,6 @@ public class SuperheroController {
     public SuperheroController(ApplicationContext context, @Value("${s.repository}") String impl) {
         //this.repository = new SuperheroRepository_DB();
         repository = (IRepositories) context.getBean(impl);
-
     }
 
 
