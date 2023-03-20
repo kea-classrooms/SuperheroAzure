@@ -14,5 +14,4 @@ public interface IRepositories {
     public ArrayList<heroPowersDTO> getHeroPowers(String name);
     public ArrayList<heroCityDTO> getHeroCity(String name);
 
-
 }

@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.context.ApplicationContext;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,6 @@ import java.util.List;
 
 public class SuperheroController {
 
-    // Dette skal være IRepositories ??
     IRepositories repository;
 
     public SuperheroController(ApplicationContext context, @Value("${s.repository}") String impl) {
@@ -32,9 +31,11 @@ public class SuperheroController {
 
 
     @GetMapping(path = "/")
-    public ResponseEntity<List<Superhero>> getSuperheroList(@RequestParam(required = false) String format){
+    public String getSuperheroList(Model model){
         ArrayList<Superhero> list = repository.getSuperheroesFromDB();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        System.out.println("List size: " + list.size()); // checking if list not empty
+        model.addAttribute("list", list);
+        return "index";
     }
 
     @GetMapping(path = "/{name}")

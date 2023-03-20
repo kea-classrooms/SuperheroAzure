@@ -1,0 +1,58 @@
+body {
+    max-width: 500px;
+    margin: auto;
+    background: whitesmoke;
+padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    color: black;
+    font-size: 3em; /make the font size larger for added impact/
+text-transform: uppercase; /use uppercase for added emphasis/
+letter-spacing: 0.2em; /add some letter-spacing for added style/
+text-shadow: 2px 2px 4px #000000; /add a subtle text shadow for added depth/
+}
+
+label {
+    width: 150px;
+    display: inline-block;
+    color: black; /change the label color to a bold gold for added flair/
+}
+
+thead {
+    color: whitesmoke;
+    font-weight: bold;
+    background-color: black; /change the header background color to match the label color/
+}
+
+table, th, td {
+    border: 2px solid black; /make the borders thicker and change the color to gold/
+border-collapse: collapse;
+    padding: 10px;
+}
+
+th {
+    text-align: center; /center align the table headers/
+text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+tbody {
+    color: black;
+}
+
+
+select, input[type="text"], input[type="number"]{
+    width: 200px;
+    box-sizing: border-box;
+    border: none; /remove the borders from input fields/
+background-color: #E0FFFF; /add a light blue background color for added style/
+padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px; /add some border-radius for added style/
+color: #000000; /change the font color to black for better visibility/
+font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+}
