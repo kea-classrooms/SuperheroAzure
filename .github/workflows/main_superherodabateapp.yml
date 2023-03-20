@@ -51,3 +51,26 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_86ACDBB6B4D44EA1BD804C1D29317BCF }}
           package: '*.jar'
+
+      - name: Check if SQL files have been modified
+        id: check-sql-files
+        run: |
+          SQL_FILES=$(git diff --name-only HEAD HEAD~ | grep "\.sql$")
+          if [[ -z "$SQL_FILES" ]]; then
+            echo "No SQL files found."
+          else
+            echo "SQL files found: $SQL_FILES"
+            echo "::set-output name=sql-files::$SQL_FILES"
+          fi
+
+      - name: Execute SQL files against Azure Database for MySQL
+        if: steps.check-sql-files.outputs.sql-files != ''
+        env:
+          MYSQL_SERVER_NAME: your-mysql-server-name.mysql.database.azure.com
+          MYSQL_DATABASE_NAME: your-mysql-database-name
+          MYSQL_USERNAME: ${{ secrets.MYSQL_USERNAME }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+        run: |
+          for file in ${GITHUB_WORKSPACE}/${{ steps.check-sql-files.outputs.sql-files }}; do
+            mysql -h $MYSQL_SERVER_NAME -u $MYSQL_USERNAME -p$MYSQL_PASSWORD $MYSQL_DATABASE_NAME < $file
+          done
